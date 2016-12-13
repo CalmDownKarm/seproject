@@ -11,12 +11,12 @@ module.exports = function(wagner) {
   wagner.factory('Jobs', function() {
     return Jobs;
   });
-  wagner.factory('Alumni', function() {
+  /*wagner.factory('Alumni', function() {
     return Alumni;
-  });
+  });*/
 
   return {
-    Jobs: Jobs, 
-    Alumni: Alumni
+    Jobs: Jobs 
+    //Alumni: Alumni 
   };
 };

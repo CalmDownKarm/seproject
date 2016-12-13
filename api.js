@@ -4,6 +4,13 @@ var status = require('http-status');
 module.exports = function(wagner) {
   var api = express.Router();
 
+  /*api.get('/',wagner.invoke(function(Jobs){
+    return function(req,res){
+      res.send("Hello World");
+    }
+  }));*/
+  
+
   api.get('/jobs/id/:id', wagner.invoke(function(Jobs) {
     return function(req, res) {
       Jobs.findOne({ _id: req.params.id }, function(error, jobs) {

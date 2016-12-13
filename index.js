@@ -5,7 +5,11 @@ require('./models')(wagner);
 
 var app = express();
 
-app.use('/api/v1', require('./api')(wagner));
+app.get('/',function(req,res){
+    //console.log("DAFUQ IS HAPPENING");
+    res.send("Hello World");
+  });
+app.use('/api/', require('./api')(wagner));
 
 app.listen(3001);
 console.log('Listening on port 3001!');

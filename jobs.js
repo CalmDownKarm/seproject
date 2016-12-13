@@ -2,7 +2,6 @@
 var mongoose = require('mongoose');
 //var Category = require('./category');
 var fx = require('./fx');
-
 var jobSchema = {
   title: { 
   	type: String, 
@@ -21,7 +20,6 @@ var jobSchema = {
   	required: true,
   	match: /.+@.+\..+/,
     lowercase: true
-
   },
   pay: {
     amount: { 
@@ -43,12 +41,11 @@ var jobSchema = {
     }
   },
   company:{type: String, required: true},
-
-  //category: Category.categorySchema,
   internal:{
     approximatePriceUSD: Number
   }
 };
+
 
 module.exports = new mongoose.Schema(jobSchema);
 module.exports.jobSchema = jobSchema;

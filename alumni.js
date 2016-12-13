@@ -1,8 +1,6 @@
 //Mongoose Schema for the alumni collection in Mongodb
 var mongoose = require('mongoose');
-//var Category = require('./category');
 var fx = require('./fx');
-
 var alumniSchema = {
   name: { 
     type: String, 
@@ -44,7 +42,6 @@ var alumniSchema = {
       }
     }
   },
-  //category: Category.categorySchema,
   internal:{
     approximatePriceUSD: Number
   }
