@@ -1,5 +1,7 @@
+//Mongoose Schema for the Jobs Collection in MongoDB
 var mongoose = require('mongoose');
 var Category = require('./category');
+var fx = require('./fx');
 
 var jobSchema = {
   title: { 
@@ -20,21 +22,32 @@ var jobSchema = {
   	match: /.+@.+\..+/,
     lowercase: true
 
-  }
+  },
   pay: {
     amount: { 
     	type: Number, 
-    	required: true
+    	required: true,
+      set: function(v){
+        v / (fx()[this.price.currency]||1);
+        return v;
+      }
     },
     currency: {
       type: String,
       enum: ['USD', 'INR'],
-      required: true
+      required: true,
+      set: function(v){
+        this.internal.approximatePriceUSD = this.price.amount / (fx()[v]||1);
+        return v;
+      }
     }
   },
   company:{type: String, required: true},
 
-  category: Category.categorySchema
+  category: Category.categorySchema,
+  internal:{
+    approximatePriceUSD: Number
+  }
 };
 
 module.exports = new mongoose.Schema(jobSchema);

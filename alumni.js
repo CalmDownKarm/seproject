@@ -1,5 +1,7 @@
+//Mongoose Schema for the alumni collection in Mongodb
 var mongoose = require('mongoose');
 var Category = require('./category');
+var fx = require('./fx');
 
 var alumniSchema = {
   name: { 
@@ -23,18 +25,29 @@ var alumniSchema = {
     type: String,
     required: true
   },
-  pay: {
+   pay: {
     amount: { 
       type: Number, 
-      required: true 
+      required: true,
+      set: function(v){
+        v / (fx()[this.price.currency]||1);
+        return v;
+      }
     },
     currency: {
       type: String,
       enum: ['USD', 'INR'],
-      required: true
+      required: true,
+      set: function(v){
+        this.internal.approximatePriceUSD = this.price.amount / (fx()[v]||1);
+        return v;
+      }
     }
   },
-  category: Category.categorySchema
+  category: Category.categorySchema,
+  internal:{
+    approximatePriceUSD: Number
+  }
 };
 
 module.exports = new mongoose.Schema(alumniSchema);
