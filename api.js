@@ -11,9 +11,9 @@ module.exports = function(wagner) {
   }));*/
   
 
-  api.get('/jobs/id/:id', wagner.invoke(function(Jobs) {
+  api.get('/jobs/', wagner.invoke(function(Jobs) {
     return function(req, res) {
-      Jobs.findOne({ _id: req.params.id }, function(error, jobs) {
+      Jobs.find({}, function(error, jobs) {
         if (error) {
           return res.
             status(status.INTERNAL_SERVER_ERROR).

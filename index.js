@@ -6,7 +6,6 @@ require('./models')(wagner);
 var app = express();
 
 app.get('/',function(req,res){
-    //console.log("DAFUQ IS HAPPENING");
     res.send("Hello World");
   });
 app.use('/api/', require('./api')(wagner));

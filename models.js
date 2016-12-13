@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var _=require('underscore');
 
 module.exports = function(wagner) {
   mongoose.connect('mongodb://localhost:27017/database');
@@ -6,17 +7,17 @@ module.exports = function(wagner) {
   var Jobs =
     mongoose.model('Jobs', require('./jobs'), 'jobs');
   var Alumni = 
-  	mongoose.model('Alumni',require('./alumni'),'jobs'); 
+  	mongoose.model('Alumni',require('./alumni'),'alumni'); 
 
-  wagner.factory('Jobs', function() {
-    return Jobs;
-  });
-  /*wagner.factory('Alumni', function() {
-    return Alumni;
-  });*/
-
-  return {
-    Jobs: Jobs 
-    //Alumni: Alumni 
+  var models = {
+  	Jobs: Jobs,
+  	Alumni: Alumni
   };
+  _.each(models, function(value, key) {
+    wagner.factory(key, function() {
+      return value;
+    });
+  });
+
+  return models
 };
