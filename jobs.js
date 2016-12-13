@@ -1,6 +1,6 @@
 //Mongoose Schema for the Jobs Collection in MongoDB
 var mongoose = require('mongoose');
-var Category = require('./category');
+//var Category = require('./category');
 var fx = require('./fx');
 
 var jobSchema = {
@@ -44,7 +44,7 @@ var jobSchema = {
   },
   company:{type: String, required: true},
 
-  category: Category.categorySchema,
+  //category: Category.categorySchema,
   internal:{
     approximatePriceUSD: Number
   }
