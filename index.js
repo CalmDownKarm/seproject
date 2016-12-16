@@ -1,14 +1,42 @@
 var express = require('express');
-var wagner = require('wagner-core');
+var MongoClient = require('mongodb').MongoClient;
+var fs = require('fs');
 
-require('./models')(wagner);
-
+var db;
 var app = express();
-
+var hello;
+fs.readFile("./Website/cover.html",'utf-8',function(err,data){
+	hello = data;
+});
+app.use(express.static('Website'));
 app.get('/',function(req,res){
-    res.send("Hello World");
+    res.send(hello);
   });
-app.use('/api/', require('./api')(wagner));
+app.get('/api/jobs/:title', function(req, res) {
+	console.log(req.params.title);
+	db.collection('jobs').find({title: req.params.title}).toArray(function(err, results) {
+    	res.send(results);
+    })
+});
 
-app.listen(3001);
-console.log('Listening on port 3001!');
+app.get('/create/', function(req, res) {
+	var j1 = ({
+		title: "Job 1",
+		location: "India",
+		description: "Good game, well played. That is if it works.",
+		contactemail: "ggwp@google.com",
+		pay: "1000",
+		company: "Google"
+	});
+	db.collection('jobs').save(j1, (err, result) => {
+		if (err) return console.log(err);
+		res.send("Added");
+	});
+})
+MongoClient.connect('mongodb://localhost:27017/test', (err, database) => {
+	if (err) return console.log(err);
+	db = database
+	app.listen(3001, () => {
+    	console.log('listening on 3001')
+	})
+});

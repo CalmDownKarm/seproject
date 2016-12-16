@@ -1,0 +1,133 @@
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
+  </head><body>
+    <div class="navbar">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><span>Job App</span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active">
+              <a href="cover.html">Home</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div><div class="section section-info">
+      <div class="container">
+        <div class="row">
+           <div class="col-md-4"> <img src="images\512x512.png" class="img-responsive"> </div>
+           <div class="col-md-8">
+             <h1 class="text-primary">Global</h1> <h3>Global job metrics</h3> <p>You can filter out jobs and obtain details in parameters such as Pay, Location, Company and Skills their employees have.<br></p>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="section">
+       <div class="container">
+         <div class="row">
+           <div class="col-md-12">
+             <h1>Search jobs by</h1>
+             <div class="row">
+               <div class="col-md-6">
+                 <h1>Company</h1>
+                 <form class="form-horizontal" role="form">
+                   <div class="form-group" id="companysearch">
+                     <div class="col-sm-10">
+                       <input type="search" class="form-control" id="company" placeholder="Google, Microsoft etc."></div>
+                     </div></form>
+                   </div>
+                   <div class="col-md-6"><h1>Pay</h1>
+                     <form class="form-horizontal" role="form">
+                       <div class="form-group" id="paysearch">
+                         <div class="col-sm-10">
+                           <input type="number" min="0" class="form-control" id="pay" placeholder="20000, 780000 etc.">
+                         </div>
+                       </div>
+                     </form>
+                   </div>
+                 </div>
+
+                 <div class="row">
+                   <div class="col-md-6">
+                     <h1>Location</h1>
+                     <form class="form-horizontal" role="form">
+                       <div class="form-group" id="locationsearch">
+                         <div class="col-sm-10">
+                           <input type="search" class="form-control" id="location" placeholder="Pune, Mumbai etc.">
+                         </div>
+                       </div>
+                     </form>
+                   </div>
+                   <div class="col-md-6">
+                     <h1>Skill set</h1>
+                     <form class="form-horizontal" role="form">
+                       <div class="form-group" id="skillsearch">
+                         <div class="col-sm-10">
+                           <input type="search" class="form-control" id="skill" placeholder="Java, C++ etc.">
+                         </div>
+                       </div>
+                     </form>
+                   </div>
+                 </div>
+                 <div class="row">
+                   <div class="col-md-12">
+                     <a class="btn btn-lg btn-primary" id="gengraph" data-toggle="modal" data-target="#genmodal" onclick="post()">Generate Graph<br></a>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+         <div class="modal fade" id="genmodal">
+           <div class="modal-dialog">
+             <div class="modal-content">
+               <div class="modal-header">
+                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                 <h4 class="modal-title">Modal title</h4>
+               </div>
+               <div class="modal-body"><p>One fine body...</p>
+               </div>
+               <div class="modal-footer"><a class="btn btn-default" data-dismiss="modal">Close</a>
+                 <a class="btn btn-primary">Save changes</a>
+               </div>
+             </div>
+           </div>
+         </div>
+</body></html>
+<script type="text/javascript">
+  function post(){
+    var location = $("#location").val();
+    var company = $("#company").val();
+    var pay = $("#pay").val();
+    var skill = $("#skill").val();
+    var formdata = {Location: location, Company:company, Pay:pay, Skill:skill};
+    console.log(formdata);
+    $.ajax({
+      url:aalsdj,
+      type:POST,
+      data:formdata,
+      success: function(data)
+      {
+
+      },
+      error: function(data)
+      {
+
+      }
+    });
+  }
+</script>
